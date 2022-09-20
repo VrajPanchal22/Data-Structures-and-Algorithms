@@ -1,0 +1,38 @@
+public class Main {
+
+    public static void main(String[] args) {
+        int[] arr = {-18, -12, -4, 0, 2, 3, 4, 15, 16, 18, 22, 45, 89};
+        int i = 0;
+        int j = arr.length-1;
+        int target = 45;
+        int ans = binarySearch(arr, i, j, target);
+        System.out.println(ans);
+    }
+
+    // return the index
+    // return -1 if it does not exist
+    static int binarySearch(int[] arr, int i, int j, int target) {
+        if(i==j){
+            if(arr[i]==target){
+                return i;
+            }
+            return -1;
+        }
+
+        while(i <= j) {
+            // find the middle element
+//            int mid = (start + end) / 2; // might be possible that (start + end) exceeds the range of int in java
+            // int mid = i + (end - start) / 2;
+            int mid = (i + j) / 2;
+            if (target < arr[mid]) {
+                binarySearch(arr, i, j = mid-1, target);
+            } else if (target > arr[mid]) {
+                binarySearch(arr, i = mid+1, j, target);
+            } else {
+                // ans found
+                return mid;
+            }
+        }
+        return -1;
+    }
+}
